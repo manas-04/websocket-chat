@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +27,7 @@ class DatabaseService {
       return;
     }
     try {
-      await box.put(key.toLowerCase(), value);
+      await box.put(key.toLowerCase(), json.encode(value));
     } catch (e) {
       debugPrint('Error while saving data: $e');
       rethrow;
@@ -37,7 +39,12 @@ class DatabaseService {
       return null;
     }
     try {
-      return box.get(key.toLowerCase());
+      String? data = box.get(key.toLowerCase());
+      if (data != null) {
+        return json.decode(data);
+      } else {
+        return null;
+      }
     } catch (err) {
       debugPrint('Data base error: $err');
       return null;

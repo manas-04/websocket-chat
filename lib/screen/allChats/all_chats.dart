@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:websocket_chat_app/bloc/chat/chat_bloc.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/all_chats/all_chats_bloc.dart';
@@ -30,7 +31,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
         backgroundColor: const Color.fromARGB(255, 1, 133, 150),
         title: const Text(
           "Welcome!",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
         centerTitle: false,
         actions: [
@@ -78,7 +81,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
         child: BlocConsumer<ChatsBloc, ChatsState>(
           listener: (context, state) {
             if (state is ChatTileClickedState) {
-              Navigator.pushNamed(context, AppRouteConstants.chat);
+              Navigator.pushNamed(context, AppRouteConstants.chat)
+                  .then((value) => context.read<ChatBloc>().closeConnection());
             }
           },
           builder: (context, state) {

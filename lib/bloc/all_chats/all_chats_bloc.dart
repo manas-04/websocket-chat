@@ -56,11 +56,11 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         DatabaseConstants.currentUser,
       );
       if (user != null) {
-        String? userChatsString = DatabaseService.get(
+        List<dynamic>? userChatsString = DatabaseService.get(
           DatabaseService.userChats,
           user,
         );
-        List<dynamic> userChats = json.decode(userChatsString ?? "[]");
+        List<dynamic> userChats = userChatsString ?? [];
         const charset =
             'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         Random random = Random();
@@ -78,7 +78,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         await DatabaseService.put(
           DatabaseService.userChats,
           user,
-          json.encode(userChats),
+          userChats,
         );
         emit(ChatsLoadedState(userChats: userChats));
       }
@@ -103,11 +103,11 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         DatabaseConstants.currentUser,
       );
       if (user != null) {
-        String? chats = DatabaseService.get(
+        List<dynamic>? chats = DatabaseService.get(
           DatabaseService.userChats,
           user,
         );
-        emit(ChatsLoadedState(userChats: json.decode(chats ?? "[]")));
+        emit(ChatsLoadedState(userChats: chats ?? []));
       }
     } catch (err) {
       debugPrint('Something went wrong - $err');
@@ -130,16 +130,16 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         DatabaseConstants.currentUser,
       );
       if (user != null) {
-        String? userChatsString = DatabaseService.get(
+        List<dynamic>? userChatsString = DatabaseService.get(
           DatabaseService.userChats,
           user,
         );
-        List<dynamic> userChats = json.decode(userChatsString ?? "[]");
+        List<dynamic> userChats = userChatsString ?? [];
         userChats.removeWhere((element) => element == event.chatId);
         await DatabaseService.put(
           DatabaseService.userChats,
           user,
-          json.encode(userChats),
+          userChats,
         );
         emit(ChatsLoadedState(userChats: userChats));
       }

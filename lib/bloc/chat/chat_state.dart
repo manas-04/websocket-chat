@@ -7,6 +7,10 @@ class ChatState extends Equatable {
 
 class InitialChatState extends ChatState {}
 
+class ChatLoadingState extends ChatState {}
+
+class ChatLoadedState extends ChatState {}
+
 class ChatErrorState extends ChatState {
   final String message;
 
