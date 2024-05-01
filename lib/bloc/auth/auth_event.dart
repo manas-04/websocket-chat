@@ -22,3 +22,5 @@ class AuthButtonClickEvent extends AuthEvent {
     required this.isLoginFlow,
   });
 }
+
+class LogoutButtonClicked extends AuthEvent {}

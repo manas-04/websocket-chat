@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:websocket_chat_app/utils/database_constants.dart';
 
 import '../../services/database_service.dart';
 
@@ -9,11 +10,23 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   bool obscureText = true;
-  bool isSignUpFlow = false;
 
   AuthBloc() : super(AuthInitialState()) {
     on<TogglePasswordVisibiltyEvent>(_togglePasswordVisibility);
     on<AuthButtonClickEvent>(_login);
+    on<LogoutButtonClicked>(_logout);
+  }
+
+  Future<void> _logout(
+    AuthEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    await DatabaseService.put(
+      DatabaseService.userBox,
+      DatabaseConstants.currentUser,
+      "",
+    );
+    emit(LogoutSuccessfulState());
   }
 
   Future<void> _togglePasswordVisibility(
@@ -45,7 +58,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           if (user == event.password) {
             await DatabaseService.put(
               DatabaseService.userBox,
-              "currentUser",
+              DatabaseConstants.currentUser,
               event.userName,
             );
             emit(AuthSuccessState());
@@ -60,7 +73,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           if (event.isLoginFlow) {
             emit(
               AuthFailedState(
-                message: "User doesn't exists",
+                message:
+                    "User doesn't exists! To create a new user click on signUp",
               ),
             );
           } else {
@@ -71,7 +85,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             );
             await DatabaseService.put(
               DatabaseService.userBox,
-              "currentUser",
+              DatabaseConstants.currentUser,
               event.userName,
             );
             emit(AuthSuccessState());

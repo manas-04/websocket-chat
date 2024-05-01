@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:websocket_chat_app/utils/app_route_contants.dart';
 
+import '../utils/app_route_contants.dart';
 import '../injectors/bloc_injector.dart';
 import '../services/web_socket_service.dart';
 import '../utils/app_routes.dart';
@@ -23,6 +23,7 @@ class WebSocketChatApp extends StatelessWidget {
       create: (context) => WebSocketService(),
       child: BlocInjector(
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Web Socket Chat App',
           routes: AppRoutes.routesMap,
           initialRoute: AppRouteConstants.home,

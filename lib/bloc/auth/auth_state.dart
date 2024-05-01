@@ -1,38 +1,26 @@
 part of 'auth_bloc.dart';
 
-abstract class AuthState extends Equatable {}
-
-class AuthInitialState extends AuthState {
+abstract class AuthState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class PasswordVisibilityOnState extends AuthState {
-  @override
-  List<Object?> get props => [];
-}
+class AuthInitialState extends AuthState {}
 
-class PasswordVisibilityOffState extends AuthState {
-  @override
-  List<Object?> get props => [];
-}
+class PasswordVisibilityOnState extends AuthState {}
 
-class AuthLoadingState extends AuthState {
-  @override
-  List<Object?> get props => [];
-}
+class PasswordVisibilityOffState extends AuthState {}
 
-class AuthSuccessState extends AuthState {
-  @override
-  List<Object?> get props => [];
-}
+class AuthLoadingState extends AuthState {}
+
+class AuthSuccessState extends AuthState {}
 
 class AuthFailedState extends AuthState {
   final String message;
 
   AuthFailedState({required this.message});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [message];
 }
 
 class AuthErrorState extends AuthState {
@@ -43,3 +31,5 @@ class AuthErrorState extends AuthState {
   @override
   List<Object?> get props => [message];
 }
+
+class LogoutSuccessfulState extends AuthState {}
