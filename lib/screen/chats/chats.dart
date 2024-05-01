@@ -47,7 +47,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => {},
+        onPressed: () => {context.read<ChatsBloc>().add(AddNewChatsEvent())},
         backgroundColor: const Color.fromARGB(255, 1, 133, 150),
         label: const Row(
           children: [
@@ -75,7 +75,57 @@ class _ChatsScreenState extends State<ChatsScreen> {
               )
             }
         },
-        child: Container(),
+        child: BlocConsumer<ChatsBloc, ChatsState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            if (state is ChatsLoadedState) {
+              if (state.userChats.isEmpty) {
+                return const Center(
+                  child: Text(
+                    "Initiate a new chat!",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 1, 133, 150),
+                      fontSize: 24,
+                    ),
+                  ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: state.userChats.length,
+                    itemBuilder: (context, index) => Container(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      child: ListTile(
+                        onTap: () => {},
+                        tileColor: const Color.fromARGB(255, 223, 250, 255),
+                        title: Text("Chat ID - ${state.userChats[index]}"),
+                        trailing: InkWell(
+                          onTap: () => {
+                            context.read<ChatsBloc>().add(
+                                DeleteChatEvent(chatId: state.userChats[index]))
+                          },
+                          child: const Icon(
+                            Icons.delete_forever,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }
+            if (state is ChatsLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                ),
+              );
+            }
+            return Container();
+          },
+        ),
       ),
     );
   }
