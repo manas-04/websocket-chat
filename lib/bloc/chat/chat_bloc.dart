@@ -17,7 +17,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   String currentUser = "";
   List<dynamic>? messages = [];
   final WebSocketService _webSocketService;
-  StreamSubscription<dynamic>? streamSubscription;
+  StreamSubscription<dynamic>? subscription;
 
   ChatBloc(this._webSocketService) : super(InitialChatState()) {
     on<GetInitialMessageEvent>(_getInitialMessages);
@@ -27,7 +27,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   Future<void> setupConnectionAndListen() async {
     try {
-      streamSubscription?.cancel();
+      subscription?.cancel();
 
       final currentChatId = DatabaseService.get(
         DatabaseService.userChats,
@@ -35,7 +35,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       );
 
       // Create a new subscription
-      streamSubscription = _webSocketService.messageStream.listen((event) {
+      subscription = _webSocketService.messageStream.listen((event) {
         add(
           ChatMessageReceiveEvent(
             chatID: currentChatId,
@@ -122,9 +122,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   Future<void> closeConnection() async {
-    if (streamSubscription != null) {
-      await streamSubscription!.cancel();
-      streamSubscription = null;
+    if (subscription != null) {
+      await subscription!.cancel();
+      subscription = null;
     }
     try {
       _webSocketService.closeConnection();

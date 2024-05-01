@@ -24,7 +24,15 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChatBloc, ChatState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is ChatErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+            ),
+          );
+        }
+      },
       builder: (context, state) => Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 1, 133, 150),
