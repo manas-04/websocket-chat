@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
-import '../../bloc/chats/chats_bloc.dart';
+import '../../bloc/all_chats/all_chats_bloc.dart';
 import '../../utils/app_route_contants.dart';
 
 class ChatsScreen extends StatefulWidget {
@@ -76,7 +76,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
             }
         },
         child: BlocConsumer<ChatsBloc, ChatsState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is ChatTileClickedState) {
+              Navigator.pushNamed(context, AppRouteConstants.chat);
+            }
+          },
           builder: (context, state) {
             if (state is ChatsLoadedState) {
               if (state.userChats.isEmpty) {
@@ -97,7 +101,14 @@ class _ChatsScreenState extends State<ChatsScreen> {
                     itemBuilder: (context, index) => Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       child: ListTile(
-                        onTap: () => {},
+                        onTap: () => {
+                          context.read<ChatsBloc>().add(
+                                ChatTileClickEvent(
+                                  chatID: state.userChats[index],
+                                  chatList: state.userChats,
+                                ),
+                              )
+                        },
                         tileColor: const Color.fromARGB(255, 223, 250, 255),
                         title: Text("Chat ID - ${state.userChats[index]}"),
                         trailing: InkWell(

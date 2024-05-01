@@ -1,4 +1,4 @@
-part of 'chats_bloc.dart';
+part of 'all_chats_bloc.dart';
 
 class ChatsState extends Equatable {
   @override
@@ -8,6 +8,8 @@ class ChatsState extends Equatable {
 class InitialChatsState extends ChatsState {}
 
 class ChatsLoadingState extends ChatsState {}
+
+class ChatTileClickedState extends ChatsState {}
 
 class ChatsLoadedState extends ChatsState {
   final List<dynamic> userChats;

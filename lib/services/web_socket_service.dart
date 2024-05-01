@@ -14,7 +14,6 @@ class WebSocketService {
     }
   }
 
-  // Sends a message over the WebSocket connection.
   void sendMessage(String message) {
     if (_socketChannel != null) {
       _socketChannel!.sink.add(message);
@@ -23,13 +22,11 @@ class WebSocketService {
     }
   }
 
-  // Returns a broadcast stream of messages received from the WebSocket server.
   Stream get messageStream {
     connectWss();
     return _socketChannel!.stream.asBroadcastStream();
   }
 
-  // Closes the WebSocket connection.
   void closeConnection() {
     if (_socketChannel != null) {
       _socketChannel!.sink.close();

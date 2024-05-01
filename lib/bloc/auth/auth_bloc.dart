@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:websocket_chat_app/utils/database_constants.dart';
+import 'package:websocket_chat_app/utils/string_helper.dart';
 
 import '../../services/database_service.dart';
 
@@ -96,7 +97,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       debugPrint('Something went wrong $err');
       emit(
         AuthErrorState(
-          message: "Something went wrong! Please try again later",
+          message: StringHelpers.errorMessage,
         ),
       );
     }

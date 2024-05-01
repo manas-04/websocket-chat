@@ -6,11 +6,14 @@ import '../utils/database_constants.dart';
 class DatabaseService {
   static late final Box<String> userBox;
   static late final Box<String> userChats;
+  static late final Box<String> seperateChatBox;
 
   static Future<void> init() async {
     try {
       userBox = await Hive.openBox<String>(DatabaseConstants.userBox);
-      userChats = await Hive.openBox<String>(DatabaseConstants.chatBox);
+      userChats = await Hive.openBox<String>(DatabaseConstants.chatsBox);
+      seperateChatBox =
+          await Hive.openBox<String>(DatabaseConstants.seperateChatBox);
     } catch (error) {
       debugPrint("Error occured while opening hive");
     }

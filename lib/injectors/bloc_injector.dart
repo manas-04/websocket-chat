@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:websocket_chat_app/bloc/auth/auth_bloc.dart';
-import 'package:websocket_chat_app/bloc/chats/chats_bloc.dart';
+
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/all_chats/all_chats_bloc.dart';
 
 class BlocInjector extends StatelessWidget {
   final Widget child;
