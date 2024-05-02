@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:websocket_chat_app/routes/router_helpers.dart';
+import 'package:websocket_chat_app/screen/chat/chat.dart';
 
 import '/routes/app_route_contants.dart';
 import '/screen/login/login.dart';
@@ -30,10 +31,7 @@ class AppRoutes {
       GoRoute(
         path: AppRouteConstants.chat,
         builder: (context, state) {
-          return const ChatsScreen();
-        },
-        redirect: (context, state) {
-          return RouteHelpers.checkAuthPath();
+          return const ChatScreen();
         },
       ),
     ],

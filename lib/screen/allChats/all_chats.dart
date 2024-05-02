@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/all_chats/all_chats_bloc.dart';
+import '../../bloc/chat/chat_bloc.dart';
 import '../../routes/app_route_contants.dart';
-import '/bloc/chat/chat_bloc.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -78,7 +78,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
           listener: (context, state) {
             if (state is ChatTileClickedState) {
               context
-                  .pushNamed(AppRouteConstants.chat)
+                  .push(AppRouteConstants.chat)
                   .then((value) => context.read<ChatBloc>().closeConnection());
             }
           },
