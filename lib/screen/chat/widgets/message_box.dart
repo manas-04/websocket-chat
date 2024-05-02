@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/color_helpers.dart';
 import '/bloc/chat/chat_bloc.dart';
 
 class MessageBox extends StatelessWidget {
@@ -50,11 +51,11 @@ class MessageBox extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: Color.fromARGB(255, 1, 133, 150),
+              color: ColorHelpers.primaryLight,
             ),
             child: const Icon(
               Icons.send,
-              color: Colors.white,
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/chat/chat_bloc.dart';
+import '../../../utils/color_helpers.dart';
 import '../../../utils/size_helpers.dart';
 
 class MessageList extends StatelessWidget {
@@ -28,9 +29,8 @@ class MessageList extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: isUserMessage
-                      ? const Color.fromARGB(255, 1, 133, 150)
-                      : Colors.purple,
+                  color:
+                      isUserMessage ? ColorHelpers.primaryLight : Colors.purple,
                   borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(14),
                     topRight: isUserMessage

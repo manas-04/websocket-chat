@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../bloc/chat/chat_bloc.dart';
 import '../../screen/chat/widgets/message_box.dart';
+import '../../utils/color_helpers.dart';
 import '/screen/chat/widgets/message_list.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ChatScreenState extends State<ChatScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 1, 133, 150),
+            backgroundColor: ColorHelpers.primaryLight,
             title: Text(
               "Chat ID - ${context.read<ChatBloc>().currentChat}",
               style: const TextStyle(color: Colors.white),
@@ -46,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
               onTap: () => {context.pop()},
               child: const Icon(
                 Icons.arrow_back_ios,
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: Colors.white,
               ),
             ),
           ),

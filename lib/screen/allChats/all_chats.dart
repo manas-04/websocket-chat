@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:websocket_chat_app/utils/color_helpers.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/all_chats/all_chats_bloc.dart';
@@ -29,7 +30,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color.fromARGB(255, 1, 133, 150),
+        backgroundColor: ColorHelpers.primaryLight,
         title: const Text(
           "Welcome!",
           style: TextStyle(
@@ -52,7 +53,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => {context.read<ChatsBloc>().add(AddNewChatsEvent())},
-        backgroundColor: const Color.fromARGB(255, 1, 133, 150),
+        backgroundColor: ColorHelpers.primaryLight,
         label: const Row(
           children: [
             Icon(
@@ -95,7 +96,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                 child: Text(
                   "Initiate a new chat!",
                   style: TextStyle(
-                    color: Color.fromARGB(255, 1, 133, 150),
+                    color: ColorHelpers.primaryLight,
                     fontSize: 24,
                   ),
                 ),
