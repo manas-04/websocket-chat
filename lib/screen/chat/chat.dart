@@ -1,12 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../bloc/chat/chat_bloc.dart';
 import '../../screen/chat/widgets/message_box.dart';
 import '/screen/chat/widgets/message_list.dart';
 
-@RoutePage()
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
 
@@ -43,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
             style: const TextStyle(color: Colors.white),
           ),
           leading: InkWell(
-            onTap: () => {context.router.back()},
+            onTap: () => {context.pop()},
             child: const Icon(
               Icons.arrow_back_ios,
               color: Colors.white,

@@ -1,14 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:websocket_chat_app/routes/app_route_contants.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../utils/color_helpers.dart';
 import '../../utils/size_helpers.dart';
-import '/routes/auto_app_routes.dart';
 import '/screen/login/widgets/auth_form.dart';
 
-@RoutePage()
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -48,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   );
                 } else if (state is AuthSuccessState) {
-                  context.router.popAndPush(const ChatsRoute());
+                  context.go(AppRouteConstants.chatsScreen);
                 }
               },
               builder: (context, state) => Container(

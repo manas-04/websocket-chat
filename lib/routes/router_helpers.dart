@@ -14,7 +14,7 @@ class RouteHelpers {
     return false;
   }
 
-  static String checkAuthPath() {
+  static Future<String> checkAuthPath() async {
     final currentUser = DatabaseService.get(
       DatabaseService.userBox,
       DatabaseConstants.currentUser,
