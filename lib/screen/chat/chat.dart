@@ -34,32 +34,34 @@ class _ChatScreenState extends State<ChatScreen> {
           );
         }
       },
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 1, 133, 150),
-          title: Text(
-            "Chat ID - ${context.read<ChatBloc>().currentChat}",
-            style: const TextStyle(color: Colors.white),
-          ),
-          leading: InkWell(
-            onTap: () => {context.pop()},
-            child: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color.fromARGB(255, 1, 133, 150),
+            title: Text(
+              "Chat ID - ${context.read<ChatBloc>().currentChat}",
+              style: const TextStyle(color: Colors.white),
+            ),
+            leading: InkWell(
+              onTap: () => {context.pop()},
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            // ignore: prefer_const_constructors
-            MessageList(),
-            MessageBox(
-              messageController: _messageController,
-            )
-          ],
-        ),
-      ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              // ignore: prefer_const_constructors
+              MessageList(),
+              MessageBox(
+                messageController: _messageController,
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

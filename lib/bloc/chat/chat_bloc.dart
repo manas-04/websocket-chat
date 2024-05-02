@@ -27,6 +27,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   Future<void> setupConnectionAndListen() async {
     try {
+      currentUser = DatabaseService.get(
+        DatabaseService.userBox,
+        DatabaseConstants.currentUser,
+      );
       subscription?.cancel();
       currentChat = DatabaseService.get(
         DatabaseService.userChats,
