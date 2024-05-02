@@ -46,7 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
               onTap: () => {context.pop()},
               child: const Icon(
                 Icons.arrow_back_ios,
-                color: Colors.white,
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
             ),
           ),
