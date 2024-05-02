@@ -36,7 +36,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
       emit(ChatTileClickedState());
       emit(ChatsLoadedState());
     } catch (err) {
-      debugPrint('Something went wrong - $err');
+      debugPrint('Something went wrong in _chatTileClicked - $err');
       emit(
         ChatsErrorState(
           message: StringHelpers.errorMessage,
@@ -53,11 +53,11 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
       emit(ChatsLoadingState());
       String? user = DatabaseService.getCurrentUser();
       if (user != null) {
-        List<dynamic>? userChatsString = DatabaseService.get(
-          DatabaseService.userChats,
-          user,
-        );
-        userChats = userChatsString ?? [];
+        userChats = DatabaseService.get(
+              DatabaseService.userChats,
+              user,
+            ) ??
+            [];
         const charset =
             'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         Random random = Random();
@@ -80,7 +80,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         emit(ChatsLoadedState());
       }
     } catch (err) {
-      debugPrint('Something went wrong - $err');
+      debugPrint('Something went wrong in _addUserChats - $err');
       emit(
         ChatsErrorState(
           message: StringHelpers.errorMessage,
@@ -98,13 +98,14 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
       String? user = DatabaseService.getCurrentUser();
       if (user != null) {
         userChats = DatabaseService.get(
-          DatabaseService.userChats,
-          user,
-        );
+              DatabaseService.userChats,
+              user,
+            ) ??
+            [];
         emit(ChatsLoadedState());
       }
     } catch (err) {
-      debugPrint('Something went wrong - $err');
+      debugPrint('Something went wrong in _getUserChats - $err');
       emit(
         ChatsErrorState(
           message: StringHelpers.errorMessage,
@@ -135,7 +136,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         emit(ChatsLoadedState());
       }
     } catch (err) {
-      debugPrint('Something went wrong - $err');
+      debugPrint('Something went wrong in _deleteUserChats - $err');
       emit(
         ChatsErrorState(
           message: StringHelpers.errorMessage,

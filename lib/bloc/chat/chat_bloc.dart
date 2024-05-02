@@ -97,7 +97,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       }
       emit(ChatLoadedState());
     } catch (err) {
-      debugPrint('Something went wrong - $err');
+      debugPrint('Something went wrong 5 - $err');
       emit(
         ChatErrorState(
           message: StringHelpers.errorMessage,

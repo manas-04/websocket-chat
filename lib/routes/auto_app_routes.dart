@@ -25,9 +25,7 @@ class AutoAppRoutes extends _$AutoAppRoutes {
         AutoRoute(
           path: AppRouteConstants.chat,
           page: ChatRoute.page,
-          guards: [
-            AuthGuard(),
-          ],
+          guards: [AuthGuard()],
         ),
       ];
 }

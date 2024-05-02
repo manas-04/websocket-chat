@@ -8,6 +8,9 @@ class AuthGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) {
     bool authCheck = RouteHelpers.checkAuth();
     if (authCheck) {
+      if (resolver.routeName == LoginRoute.name) {
+        router.popAndPush(const ChatsRoute());
+      }
       resolver.next(true);
     } else {
       router.popAndPush(const LoginRoute());
