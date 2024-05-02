@@ -41,6 +41,18 @@ class DatabaseService {
     }
   }
 
+  static Future<void> deleteKey(
+    Box<String> box,
+    String key,
+  ) async {
+    try {
+      await box.delete(key.toLowerCase());
+    } catch (err) {
+      debugPrint('Error while deleting data: $err');
+      rethrow;
+    }
+  }
+
   static dynamic get(Box<String> box, String key) {
     if (key.isEmpty) {
       return null;

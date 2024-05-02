@@ -128,6 +128,10 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         );
         userChats = userChatsString ?? [];
         userChats.removeWhere((element) => element == event.chatId);
+        await DatabaseService.deleteKey(
+          DatabaseService.seperateChatBox,
+          event.chatId,
+        );
         await DatabaseService.put(
           DatabaseService.userChats,
           user,
