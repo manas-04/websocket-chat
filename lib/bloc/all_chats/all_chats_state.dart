@@ -11,10 +11,7 @@ class ChatsLoadingState extends ChatsState {}
 
 class ChatTileClickedState extends ChatsState {}
 
-class ChatsLoadedState extends ChatsState {
-  final List<dynamic> userChats;
-  ChatsLoadedState({required this.userChats});
-}
+class ChatsLoadedState extends ChatsState {}
 
 class ChatsErrorState extends ChatsState {
   final String message;

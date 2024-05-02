@@ -53,7 +53,8 @@ class _ChatScreenState extends State<ChatScreen> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const MessageList(),
+            // ignore: prefer_const_constructors
+            MessageList(),
             MessageBox(
               messageController: _messageController,
             )

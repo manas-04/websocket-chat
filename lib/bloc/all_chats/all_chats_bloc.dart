@@ -15,6 +15,7 @@ part 'all_chats_state.dart';
 // Chats - ["afdwed","asefr","tdyhgv"];
 
 class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
+  List<dynamic> userChats = [];
   ChatsBloc() : super(InitialChatsState()) {
     on<GetUserChatsEvent>(_getUserChats);
     on<AddNewChatsEvent>(_addUserChats);
@@ -33,7 +34,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         event.chatID,
       );
       emit(ChatTileClickedState());
-      emit(ChatsLoadedState(userChats: event.chatList));
+      emit(ChatsLoadedState());
     } catch (err) {
       debugPrint('Something went wrong - $err');
       emit(
@@ -56,7 +57,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
           DatabaseService.userChats,
           user,
         );
-        List<dynamic> userChats = userChatsString ?? [];
+        userChats = userChatsString ?? [];
         const charset =
             'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         Random random = Random();
@@ -76,7 +77,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
           user,
           userChats,
         );
-        emit(ChatsLoadedState(userChats: userChats));
+        emit(ChatsLoadedState());
       }
     } catch (err) {
       debugPrint('Something went wrong - $err');
@@ -96,11 +97,11 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
     try {
       String? user = DatabaseService.getCurrentUser();
       if (user != null) {
-        List<dynamic>? chats = DatabaseService.get(
+        userChats = DatabaseService.get(
           DatabaseService.userChats,
           user,
         );
-        emit(ChatsLoadedState(userChats: chats ?? []));
+        emit(ChatsLoadedState());
       }
     } catch (err) {
       debugPrint('Something went wrong - $err');
@@ -124,14 +125,14 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
           DatabaseService.userChats,
           user,
         );
-        List<dynamic> userChats = userChatsString ?? [];
+        userChats = userChatsString ?? [];
         userChats.removeWhere((element) => element == event.chatId);
         await DatabaseService.put(
           DatabaseService.userChats,
           user,
           userChats,
         );
-        emit(ChatsLoadedState(userChats: userChats));
+        emit(ChatsLoadedState());
       }
     } catch (err) {
       debugPrint('Something went wrong - $err');

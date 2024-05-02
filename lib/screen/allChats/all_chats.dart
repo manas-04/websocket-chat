@@ -89,51 +89,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
             }
           },
           builder: (context, state) {
-            if (state is ChatsLoadedState) {
-              if (state.userChats.isEmpty) {
-                return const Center(
-                  child: Text(
-                    "Initiate a new chat!",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 1, 133, 150),
-                      fontSize: 24,
-                    ),
-                  ),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    itemCount: state.userChats.length,
-                    itemBuilder: (context, index) => Container(
-                      margin: const EdgeInsets.symmetric(vertical: 4),
-                      child: ListTile(
-                        onTap: () => {
-                          context.read<ChatsBloc>().add(
-                                ChatTileClickEvent(
-                                  chatID: state.userChats[index],
-                                  chatList: state.userChats,
-                                ),
-                              )
-                        },
-                        tileColor: const Color.fromARGB(255, 223, 250, 255),
-                        title: Text("Chat ID - ${state.userChats[index]}"),
-                        trailing: InkWell(
-                          onTap: () => {
-                            context.read<ChatsBloc>().add(
-                                DeleteChatEvent(chatId: state.userChats[index]))
-                          },
-                          child: const Icon(
-                            Icons.delete_forever,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }
-            }
             if (state is ChatsLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(
@@ -141,7 +96,56 @@ class _ChatsScreenState extends State<ChatsScreen> {
                 ),
               );
             }
-            return Container();
+            if (context.read<ChatsBloc>().userChats.isEmpty) {
+              return const Center(
+                child: Text(
+                  "Initiate a new chat!",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 1, 133, 150),
+                    fontSize: 24,
+                  ),
+                ),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  itemCount: context.read<ChatsBloc>().userChats.length,
+                  itemBuilder: (context, index) => Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    child: ListTile(
+                      onTap: () => {
+                        context.read<ChatsBloc>().add(
+                              ChatTileClickEvent(
+                                chatID:
+                                    context.read<ChatsBloc>().userChats[index],
+                                chatList: context.read<ChatsBloc>().userChats,
+                              ),
+                            )
+                      },
+                      tileColor: const Color.fromARGB(255, 223, 250, 255),
+                      title: Text(
+                          "Chat ID - ${context.read<ChatsBloc>().userChats[index]}"),
+                      trailing: InkWell(
+                        onTap: () => {
+                          context.read<ChatsBloc>().add(
+                                DeleteChatEvent(
+                                  chatId: context
+                                      .read<ChatsBloc>()
+                                      .userChats[index],
+                                ),
+                              )
+                        },
+                        child: const Icon(
+                          Icons.delete_forever,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
           },
         ),
       ),
