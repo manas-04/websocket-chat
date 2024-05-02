@@ -29,7 +29,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     try {
       subscription?.cancel();
 
-      final currentChatId = DatabaseService.get(
+      currentChat = DatabaseService.get(
         DatabaseService.userChats,
         DatabaseConstants.currentChat,
       );
@@ -38,7 +38,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       subscription = _webSocketService.messageStream.listen((event) {
         add(
           ChatMessageReceiveEvent(
-            chatID: currentChatId,
+            chatID: currentChat,
             message: event.toString(),
           ),
         );

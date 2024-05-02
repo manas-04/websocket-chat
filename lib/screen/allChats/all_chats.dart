@@ -1,11 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:websocket_chat_app/bloc/chat/chat_bloc.dart';
+import 'package:websocket_chat_app/routes/auto_app_routes.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/all_chats/all_chats_bloc.dart';
-import '../../utils/app_route_contants.dart';
+import '../../routes/app_route_contants.dart';
 
+@RoutePage()
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
 
@@ -72,16 +75,16 @@ class _ChatsScreenState extends State<ChatsScreen> {
         listener: (context, state) => {
           if (state is LogoutSuccessfulState)
             {
-              Navigator.pushReplacementNamed(
-                context,
-                AppRouteConstants.home,
+              context.router.popAndPush(
+                const LoginRoute(),
               )
             }
         },
         child: BlocConsumer<ChatsBloc, ChatsState>(
           listener: (context, state) {
             if (state is ChatTileClickedState) {
-              Navigator.pushNamed(context, AppRouteConstants.chat)
+              context.router
+                  .pushNamed(AppRouteConstants.chat)
                   .then((value) => context.read<ChatBloc>().closeConnection());
             }
           },

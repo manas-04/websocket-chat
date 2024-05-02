@@ -50,10 +50,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
   ) async {
     try {
       emit(ChatsLoadingState());
-      String? user = DatabaseService.get(
-        DatabaseService.userBox,
-        DatabaseConstants.currentUser,
-      );
+      String? user = DatabaseService.getCurrentUser();
       if (user != null) {
         List<dynamic>? userChatsString = DatabaseService.get(
           DatabaseService.userChats,
@@ -97,10 +94,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
   ) async {
     emit(ChatsLoadingState());
     try {
-      String? user = DatabaseService.get(
-        DatabaseService.userBox,
-        DatabaseConstants.currentUser,
-      );
+      String? user = DatabaseService.getCurrentUser();
       if (user != null) {
         List<dynamic>? chats = DatabaseService.get(
           DatabaseService.userChats,
@@ -124,10 +118,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
   ) async {
     emit(ChatsLoadingState());
     try {
-      String? user = DatabaseService.get(
-        DatabaseService.userBox,
-        DatabaseConstants.currentUser,
-      );
+      String? user = DatabaseService.getCurrentUser();
       if (user != null) {
         List<dynamic>? userChatsString = DatabaseService.get(
           DatabaseService.userChats,

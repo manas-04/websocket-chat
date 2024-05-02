@@ -21,6 +21,13 @@ class DatabaseService {
     }
   }
 
+  static String? getCurrentUser() {
+    return DatabaseService.get(
+      DatabaseService.userBox,
+      DatabaseConstants.currentUser,
+    );
+  }
+
   static Future<void> put(Box<String> box, String key, dynamic value) async {
     if (value == null) {
       debugPrint('Value must not be null');
