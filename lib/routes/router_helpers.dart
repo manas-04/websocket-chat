@@ -1,6 +1,6 @@
-import 'package:websocket_chat_app/routes/app_route_contants.dart';
-import 'package:websocket_chat_app/services/database_service.dart';
-import 'package:websocket_chat_app/utils/database_constants.dart';
+import '../routes/app_route_contants.dart';
+import '../services/database_service.dart';
+import '../utils/database_constants.dart';
 
 class RouteHelpers {
   static bool checkAuth() {

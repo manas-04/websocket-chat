@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:websocket_chat_app/bloc/chat/chat_bloc.dart';
+import '/bloc/chat/chat_bloc.dart';
 
 class MessageBox extends StatelessWidget {
   final TextEditingController _messageController;

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:websocket_chat_app/routes/app_route_contants.dart';
-import 'package:websocket_chat_app/routes/auth_guard.dart';
 
+import '../routes/app_route_contants.dart';
+import '../routes/auth_guard.dart';
 import '../screen/allChats/all_chats.dart';
 import '../screen/chat/chat.dart';
 import '../screen/login/login.dart';

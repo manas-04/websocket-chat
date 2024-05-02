@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:websocket_chat_app/utils/color_helpers.dart';
 
+import '/utils/color_helpers.dart';
 import '../../../bloc/auth/auth_bloc.dart';
 
 class AuthForm extends StatelessWidget {

@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:websocket_chat_app/bloc/chat/chat_bloc.dart';
-import 'package:websocket_chat_app/routes/auto_app_routes.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/all_chats/all_chats_bloc.dart';
 import '../../routes/app_route_contants.dart';
+import '/routes/auto_app_routes.dart';
+import '/bloc/chat/chat_bloc.dart';
 
 @RoutePage()
 class ChatsScreen extends StatefulWidget {

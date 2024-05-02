@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:websocket_chat_app/utils/database_constants.dart';
-import 'package:websocket_chat_app/utils/string_helper.dart';
 
+import '/utils/database_constants.dart';
+import '/utils/string_helper.dart';
 import '../../services/database_service.dart';
 
 part 'auth_event.dart';
